@@ -13,10 +13,11 @@ const routes =[
     redirect: "/login",
     name: "Auth",
     component: AuthLayout,
+    meta: {isGuest: true},
     children: [
       {
         path: "/login",
-        name: "Login",
+        name: "login",
         component: login,
       },
       {
@@ -53,16 +54,15 @@ const  router = createRouter({
 });
 
 
-router.beforeEach((to,from,next)=>{
-  if(to.meta.requiresAuth && !store.state.user.token){
-    next ({name:'Login'});
-  }
-  else if(store.state.user.token && (to.name==='Login'||to.name==='Register')){
-    next({name:'dashboard'})
-  }else{
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !store.state.user.token) {
+    next({ name: "login" });
+  } else if (store.state.user.token && (to.meta.isGuest)) {
+    next({ name: "dashboard" });
+  } else {
     next();
   }
-})
+});
 
 
 export default router
