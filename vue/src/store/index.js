@@ -37,10 +37,10 @@ const store = createStore({
       state.user.data={};
       sessionStorage.removeItem("TOKEN")
    },
-    setUser: (state, userDate) => {
-      state.user.data = userDate.user;
-      state.user.data = userDate.token;
-      sessionStorage.setItem('TOKEN', userDate.token);
+    setUser: (state, userData) => {
+      state.user.data = userData.user;
+      state.user.token = userData.token; // Corrected assignment
+      sessionStorage.setItem('TOKEN', userData.token);
     },
   },
   modules:{

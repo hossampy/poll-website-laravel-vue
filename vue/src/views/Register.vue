@@ -85,7 +85,7 @@ const user = {
 function register (ev){
   ev.preventDefault();
   store.dispatch('register',user).then((res)=>{
-    router.push('/')
+    router.push({name:'dashboard'})
   })
 }
 
