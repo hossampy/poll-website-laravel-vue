@@ -28,6 +28,19 @@ const store = createStore({
             commit("setUser",res);
             return res;
           })
+    },
+    login({commit},user){
+      return fetch(`http://127.0.0.1:8000/api/register`,{
+        headers:{"content-type":"application/json",Accept :"application/json",
+        },
+        method:"POST",
+        body :JSON.stringify(user)
+
+      }).then((res)=>res.json())
+        .then((res)=>{
+          commit("setUser",res);
+          return res;
+        })
     }
 
   },
@@ -39,7 +52,7 @@ const store = createStore({
    },
     setUser: (state, userData) => {
       state.user.data = userData.user;
-      state.user.token = userData.token; // Corrected assignment
+      state.user.token = userData.token; //  assignment
       sessionStorage.setItem('TOKEN', userData.token);
     },
   },
