@@ -1,4 +1,4 @@
-<script>
+<script >
 export default {
   name: "login"
 }
@@ -25,7 +25,7 @@ export default {
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
           <div class="mt-2">
-            <input id="email" name="email" type="email" autocomplete="email" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input id="email" name="email" type="email" autocomplete="email" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" v-model="user.email" />
           </div>
         </div>
 
@@ -34,12 +34,28 @@ export default {
             <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
 
           </div>
+
           <div class="mt-2">
-            <input id="password" name="password" type="password" autocomplete="current-password" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input id="password" name="password" type="password" autocomplete="current-password" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" v-model="user.password" />
           </div>
-          <div class="text-sm mt-5  ">
-            <a href="#" class="font-semibold text-red-700 hover:text-red-400">Forgot password?</a>
+
+          <div class="flex items-center justify-between mt-5">
+            <div class="flex items-center">
+              <input
+                id="remember-me"
+                name="remember-me"
+                type="checkbox"
+                v-model="user.remember"
+                class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+              />
+              <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+                Remember me
+              </label>
+            </div>
           </div>
+
+
+
         </div>
 
         <div>
@@ -56,7 +72,32 @@ export default {
     </div>
 
 </template>
+<script setup >
+import store from "../store";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
+const user = {
+  email: "",
+  password: "",
+  remember:false
+};
+
+
+function login(ev) {
+  ev.preventDefault();
+  store
+    .dispatch("login", user)
+    .then(() => {
+
+      router.push({
+        name: "dashboard",
+      });
+    })
+}
+
+
+</script>
 
 <style scoped>
 
