@@ -20,18 +20,18 @@ export default {
       <h2 class="mt-0 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">register in to your account</h2>
     </div>
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-      <form class="space-y-2" action="#" method="POST">
+      <form class="space-y-2" @submit="register">
 
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">name </label>
           <div class="mt-2">
-            <input id="name" name="name" type="text" autocomplete="name" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input id="name" name="name" type="text" autocomplete="name" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" v-model="user.name" />
           </div>
         </div>
         <div>
           <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
           <div class="mt-2">
-            <input id="email" name="email" type="email" autocomplete="email" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input id="email" name="email" type="email" autocomplete="email" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" v-model="user.email" />
           </div>
         </div>
 
@@ -41,14 +41,14 @@ export default {
 
           </div>
           <div class="mt-2">
-            <input id="password" name="password" type="password" autocomplete="current-password" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input id="password" name="password" type="password" autocomplete="current-password" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" v-model="user.password" />
           </div>
           <div class="flex items-center justify-between mt-">
             <label for="password_confirmation" class="block text-sm font-medium leading-6 text-gray-900"> confirme your Password</label>
 
           </div>
           <div class="mt-2">
-            <input placeholder="password confirmation" id="password_confirmation" name="password_confirmation" type="password" autocomplete="current-password_confirmation" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+            <input placeholder="password confirmation" id="password_confirmation" name="password_confirmation" type="password" autocomplete="current-password_confirmation" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" v-model="user.password_confermation"  />
 
           <div class="text-sm mt-2">
             <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
@@ -70,7 +70,11 @@ export default {
   </div>
 </template>
 <script setup>
-import store from "@/store/index.js";
+import store from '../store';
+
+import {useRouter} from "vue-router";
+
+const router = useRouter();
 
 const user = {
   name: "",
@@ -78,5 +82,11 @@ const user = {
   password: "",
   password_confermation: "",
 };
+function register (ev){
+  ev.preventDefault();
+  store.dispatch('register',user).then((res)=>{
+    router.push('/')
+  })
+}
 
 </script>
