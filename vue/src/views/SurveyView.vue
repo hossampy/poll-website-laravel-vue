@@ -50,14 +50,17 @@
           </button>
         </div>
       </div>
+
     </template>
   </PageComponent>
 </template>
 
 <script setup>
+import store from "@/store/index.js";
+import {computed} from "vue";
 import PageComponent from "@/components/PageComponent.vue";
 
-
+const surveys = computed(()=>store.state.surveys)
 </script>
 
 <style></style>

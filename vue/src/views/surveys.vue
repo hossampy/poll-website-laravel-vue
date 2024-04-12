@@ -37,6 +37,18 @@ const title = "suervy "
 
     </template>
 </PageComponent>
+  <div class="grid grid-cols-1 gap-3 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-10">
+      <div v-for="survey in surveys"
+          :key="survey.id"
+           class="flex flex-col py-4 px-6 shadow-md bg-white hover:bg-gray-200 h-[470px]"
+      >
+          <img :src="survey.image" class="w-full h-72 object-cover">
+          <h4 class="mt-4 text-lg font-bold">{{survey.title}} </h4>
+           <div v-html="survey.description" class="overflow-hidden flex-1"></div>
+
+      </div>
+  </div>
+
 
 </template>
 <script setup>
