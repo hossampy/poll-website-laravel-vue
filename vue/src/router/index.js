@@ -6,6 +6,7 @@ import DefaultLayout from "../components/DefaultLayout.vue";
 import surveys from "@/views/surveys.vue";
 import store from "@/store/index.js";
 import AuthLayout from "@/components/AuthLayout.vue";
+import SurveyView from '@/views/SurveyView.vue';
 
 const routes =[
   {
@@ -43,6 +44,15 @@ const routes =[
         name : 'survey',
         component : surveys,
       },
+      { path: "/surveys/create",
+        name: "SurveyCreate",
+        component: SurveyView
+      },
+      { path: "/surveys/:id",
+        name: "SurveyView",
+        component: SurveyView
+      },
+
 
     ]
   }

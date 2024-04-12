@@ -11,8 +11,7 @@ const store = createStore({
         imageUrl:
           'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
      */ },
-      token:true
-     /* sessionStorage.getItem('TOKEN' ) */
+      token: sessionStorage.getItem("TOKEN" ),
 
     }
 
@@ -48,7 +47,7 @@ const store = createStore({
     },
     setToken: (state, token) => {
       state.user.token = token;
-      sessionStorage.setItem('TOKEN', token);
+      sessionStorage.setItem("TOKEN", token);
     },
   },
   modules:{

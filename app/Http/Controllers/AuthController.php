@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $data = $request->validate([
             'name' => 'required|string',
             'email' => 'required|email|string|unique:users,email',
@@ -20,8 +21,8 @@ class AuthController extends Controller
                 Password::min(8)->mixedCase()->numbers()->symbols()
             ]
         ]);
-        /** @var \App\Models\User $user */
 
+        /** @var \App\Models\User $user */
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -33,7 +34,6 @@ class AuthController extends Controller
             'user' => $user,
             'token' => $token
         ]);
-
     }
     public function login(Request $request)
     {

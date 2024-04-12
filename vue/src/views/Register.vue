@@ -48,7 +48,7 @@ export default {
 
           </div>
           <div class="mt-2">
-            <input placeholder="password confirmation" id="password_confirmation" name="password_confirmation" type="password" autocomplete="current-password_confirmation" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" v-model="user.password_confermation"  />
+            <input placeholder="password confirmation" id="password_confirmation" name="password_confirmation" type="password" autocomplete="current-password_confirmation" required="" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" v-model="user.password_confirmation"  />
 
           <div class="text-sm mt-2">
             <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a>
@@ -80,13 +80,15 @@ const user = {
   name: "",
   email: "",
   password: "",
-  password_confermation: "",
+  password_confirmation: "",
+
 };
-function register (ev){
+function register(ev) {
   ev.preventDefault();
-  store.dispatch('register',user).then((res)=>{
-    router.push({name:'dashboard'})
-  })
-}
+  store.dispatch('register', user)
+    .then((res) => {
+      router.push({ name: 'dashboard' });
+    })}
+
 
 </script>

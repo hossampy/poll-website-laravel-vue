@@ -1,4 +1,4 @@
-<script setup>
+<script >
 import PageComponent from "@/components/PageComponent.vue";
 const title = "suervy "
 
@@ -39,7 +39,12 @@ const title = "suervy "
 </PageComponent>
 
 </template>
-
+<script setup>
+import PageComponent from "@/components/PageComponent.vue";
+import store from "@/store/index.js";
+import {computed} from "vue"
+const surveys = computed(()=>store.state.surveys);
+</script>
 
 
 
