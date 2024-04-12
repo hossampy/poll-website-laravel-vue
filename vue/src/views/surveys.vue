@@ -44,7 +44,15 @@ const title = "suervy "
       >
           <img :src="survey.image" class="w-full h-72 object-cover">
           <h4 class="mt-4 text-lg font-bold">{{survey.title}} </h4>
-           <div v-html="survey.description" class="overflow-hidden flex-1"></div>
+           <div v-html="survey.description" class=" flex-1 overflow-hidden "></div>
+        <div  class=" flex-1  justify-between items-center mt-4">
+          <router-link :to="{name:'SurveyView',params:{id:survey.id}} " class="py-2 px-6   text-white bg-emerald-500 rounded-md hover:bg-emerald-600">
+            Edite
+          </router-link>
+
+
+        </div>
+
 
       </div>
   </div>
