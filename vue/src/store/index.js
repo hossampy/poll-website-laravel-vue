@@ -346,7 +346,19 @@ const tmpSurveys = [
         ]
       }
     ]
-  }
+  },
+  {
+    id: 5,
+    title: "Learning Preferences Survey",
+    slug: "learning-preferences",
+    status: "draft",
+    image: "https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    description: "Help us understand your learning preferences by answering a few questions.",
+    created_at: "2024-04-12",
+    updated_at: "2024-04-12",
+    expire_date: "2024-05-12",
+    questions: []
+      }
 ];
 
 const store = createStore({
