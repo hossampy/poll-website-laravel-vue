@@ -185,7 +185,7 @@ const tmpSurveys = [
     created_at: "2024-04-12",
     updated_at: "2024-04-12",
     expire_date: "2024-05-12",
-    questions: [
+    questions:[
       {
         id: 1,
         type: "select",
@@ -374,6 +374,8 @@ const store = createStore({
 
     },
    surveys : [...tmpSurveys],
+    questionTypes: ["text", "select", "radio", "checkbox", "textarea"],
+
   },
   getters:{},
   actions:{
