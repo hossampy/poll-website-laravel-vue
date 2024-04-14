@@ -11,7 +11,16 @@ class StoreSurveyRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
+    }
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => $this->user()->id
+
+            /* This ensures that when a new survey is created,
+             it is associated with the authenticated user who created it. */
+        ]);
     }
 
     /**
@@ -22,7 +31,12 @@ class StoreSurveyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|string|max:1000',
+            'user_id' => 'exists:users,id',
+            'status' => 'required|boolean',
+            'description' => 'nullable|string',
+            'expire_date' => 'nullable|date|after:tomorrow',
+
         ];
     }
 }
