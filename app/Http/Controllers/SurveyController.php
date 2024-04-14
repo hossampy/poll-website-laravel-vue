@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\SurveyResource;
 use App\Models\Survey;
-use App\Http\Requests\storeSurveyRequest;
+use App\Http\Requests\StoreSurveyRequest;
 use App\Http\Requests\UpdateSurveyRequest;
 use Illuminate\Http\Request;
 
@@ -23,9 +23,12 @@ class SurveyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(storeSurveyRequest $request)
+    public function store(StoreSurveyRequest $request)
     {
         //
+        $result = Survey::Create($request->validated());
+
+        return new SurveyResource($result);
     }
 
     /**
