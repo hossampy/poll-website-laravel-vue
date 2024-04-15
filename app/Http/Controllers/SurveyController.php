@@ -23,7 +23,7 @@ class SurveyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSurveyRequest $request)
+    public function store(StoreSurveyRequest $request): SurveyResource
     {
         //
         $result = Survey::Create($request->validated());
@@ -48,9 +48,12 @@ class SurveyController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
+
     public function update(UpdateSurveyRequest $request, Survey $survey)
     {
-        //
+        $survey->update($request->validated());
+        return new SurveyResource($survey);
     }
 
     /**
