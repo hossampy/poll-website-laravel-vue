@@ -257,6 +257,22 @@ if (route.params.id) {
   );
 
 }
+
+function onImageChoose(ev) {
+  const file = ev.target.files[0];
+
+  const reader = new FileReader();
+  reader.onload = () => {
+
+    model.value.image = reader.result;
+
+
+    model.value.image_url = reader.result;
+
+  };
+  reader.readAsDataURL(file);
+}
+
 function addQuestion(index) {
   const newQuestion = {
     id: uuidv4(),
