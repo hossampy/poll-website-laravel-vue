@@ -233,13 +233,13 @@ import store from "@/store/index.js";
 import {computed, ref} from "vue";
 import { v4 as uuidv4 } from "uuid";
 
-import {useRoute} from "vue-router";
+import {useRoute,useRouter} from "vue-router";
 import PageComponent from "@/components/PageComponent.vue";
 import QuestionEditor from "@/components/editor/QuestionEditor.vue";
 
 const surveys = computed(()=>store.state.surveys)
 const route = useRoute();
-
+const router = useRouter();
 let model = ref({
   title: "",
   slug: "",
@@ -285,6 +285,14 @@ function questionChange(question) {
   });
 }
 
+function saveSurvey(){
+  store.dispatch("saveSurvey" ,model.value).then(({data})=>{
+    router.push({
+      name:"SaveSurvey",
+      params:{id: data.data.id},
+    })
+  })
+}
 
 
 
