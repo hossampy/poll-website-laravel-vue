@@ -85,9 +85,10 @@ class SurveyController extends Controller
         return response('', 204);
 
     }
+    // This function saves an image encoded in base64 format to the server.
     private function saveImage($image)
     {
-        // Check if image is valid base64 string
+        // Check if image is a valid base64 string
         if (preg_match('/^data:image\/(\w+);base64,/', $image, $type)) {
             // Take out the base64 encoded text without mime type
             $image = substr($image, strpos($image, ',') + 1);
@@ -96,28 +97,38 @@ class SurveyController extends Controller
 
             // Check if file is an image
             if (!in_array($type, ['jpg', 'jpeg', 'gif', 'png'])) {
-                throw new \Exception('invalid image type');
+                throw new \Exception('Invalid image type');
             }
             $image = str_replace(' ', '+', $image);
             $image = base64_decode($image);
 
+            // Check if base64 decoding was successful
             if ($image === false) {
                 throw new \Exception('base64_decode failed');
             }
         } else {
-            throw new \Exception('did not match data URI with image data');
+            throw new \Exception('Did not match data URI with image data');
         }
 
+        // Define directory and file name
         $dir = 'images/';
-        $file = Str::random() . '.' . $type;
-        $absolutePath = public_path($dir);
-        $relativePath = $dir . $file;
+        $file = Str::random() . '.' . $type; // Generate a random file name with the correct extension
+
+        // Get absolute and relative paths
+        $absolutePath = public_path($dir); // Get the absolute path to the directory
+        $relativePath = $dir . $file; // Get the relative path including the file name
+
+        // If the directory does not exist, create it
         if (!File::exists($absolutePath)) {
             File::makeDirectory($absolutePath, 0755, true);
         }
+
+        // Write the decoded image data to the file
         file_put_contents($relativePath, $image);
 
+        // Return the relative path to the saved image
         return $relativePath;
     }
+
 
 }

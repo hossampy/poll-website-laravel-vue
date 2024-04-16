@@ -370,15 +370,35 @@ const store = createStore({
         imageUrl:
           'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
      */ },
+
       token: sessionStorage.getItem("TOKEN" ),
+      },
+    currentSurvey: {
+      data: {},
+      loading: false,
 
     },
+
    surveys : [...tmpSurveys],
     questionTypes: ["text", "select", "radio", "checkbox", "textarea"],
 
   },
   getters:{},
   actions:{
+    getSurvey({ commit }, id) {
+      commit("setCurrentSurveyLoading", true);
+      return axiosClient
+        .get(`/survey/${id}`)
+        .then((res) => {
+          commit("setCurrentSurvey", res.data);
+          commit("setCurrentSurveyLoading", false);
+          return res;
+        })
+        .catch((err) => {
+          commit("setCurrentSurveyLoading", false);
+          throw err;
+        });
+    },
     register({commit}, user) {
       return axiosClient.post('/register', user)
         .then(({data}) => {
@@ -419,6 +439,12 @@ const store = createStore({
 
   },
   mutations:{
+    setCurrentSurveyLoading: (state, loading) => {
+      state.currentSurvey.loading = loading;
+    },
+    setCurrentSurvey: (state, survey) => {
+      state.currentSurvey.data = survey.data;
+    },
 
     saveSurvey:(state,survey)=>{
       state.surveys=[...state.surveys,survey.data]

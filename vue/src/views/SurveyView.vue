@@ -230,7 +230,7 @@
 
 <script setup>
 import store from "@/store/index.js";
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
 import { v4 as uuidv4 } from "uuid";
 
 import {useRoute,useRouter} from "vue-router";
@@ -251,10 +251,18 @@ let model = ref({
   questions: [],
 });
 
+watch(
+  () => store.state.currentSurvey.data,
+  (newVal, oldVal) => {
+    model.value = {
+      ...JSON.parse(JSON.stringify(newVal)),
+
+    };
+  }
+);
+
 if (route.params.id) {
-  model.value =store.state.surveys.find(
-    (s)=>s.id === parseInt(route.params.id)
-  );
+ store.dispatch('getSurvey',route.params.id)
 
 }
 
